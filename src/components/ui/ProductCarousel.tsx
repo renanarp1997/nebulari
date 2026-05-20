@@ -10,17 +10,26 @@ export function ProductCarousel({ products }: { products: Product[] }) {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
-  const updateScrollState = () => {
+  useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
-    setCanScrollLeft(el.scrollLeft > 8);
-    setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 8);
-  };
 
-  useEffect(() => {
-    updateScrollState();
-    window.addEventListener("resize", updateScrollState);
-    return () => window.removeEventListener("resize", updateScrollState);
+    const onUpdate = () => {
+      setCanScrollLeft(el.scrollLeft > 8);
+      setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 8);
+    };
+
+    onUpdate();
+    el.addEventListener("scroll", onUpdate, { passive: true });
+    const ro = new ResizeObserver(onUpdate);
+    ro.observe(el);
+    window.addEventListener("resize", onUpdate);
+
+    return () => {
+      el.removeEventListener("scroll", onUpdate);
+      ro.disconnect();
+      window.removeEventListener("resize", onUpdate);
+    };
   }, [products.length]);
 
   const scroll = (dir: "left" | "right") => {
@@ -28,7 +37,6 @@ export function ProductCarousel({ products }: { products: Product[] }) {
     if (!el) return;
     const amount = Math.min(el.clientWidth * 0.75, 280);
     el.scrollBy({ left: dir === "left" ? -amount : amount, behavior: "smooth" });
-    window.setTimeout(updateScrollState, 400);
   };
 
   return (
@@ -59,11 +67,12 @@ export function ProductCarousel({ products }: { products: Product[] }) {
 
       <div
         ref={trackRef}
-        onScroll={updateScrollState}
         className="ecom-carousel-track ecom-scroll-bleed hide-scrollbar flex gap-2 overflow-x-auto overscroll-x-contain scroll-smooth pb-2 pt-1 touch-pan-x sm:gap-2.5"
       >
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} size="carousel" />
+          <div key={product.id} className="ecom-carousel-item shrink-0">
+            <ProductCard product={product} size="standard" />
+          </div>
         ))}
       </div>
 

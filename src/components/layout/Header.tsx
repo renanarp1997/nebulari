@@ -7,6 +7,7 @@ import { Search, ShoppingBag, Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/lib/constants";
 import { useCart } from "@/context/CartContext";
 import { UserAccountMenu } from "@/components/account/UserAccountMenu";
+import { useScrollLock } from "@/hooks/useScrollLock";
 
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -19,11 +20,15 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useScrollLock(mobileOpen);
+
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
+    if (!mobileOpen) return;
+    const onEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
     };
+    document.addEventListener("keydown", onEscape);
+    return () => document.removeEventListener("keydown", onEscape);
   }, [mobileOpen]);
 
   return (

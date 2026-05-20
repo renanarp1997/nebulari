@@ -13,12 +13,12 @@ export function Recommendations() {
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-accent">
             Para você
           </p>
-          <h2 className="mt-1 font-display text-3xl font-semibold text-foreground sm:text-4xl">
+          <h2 className="mt-1 font-display text-[2rem] font-semibold text-foreground sm:text-[2.35rem] lg:text-4xl">
             Recomendados para sua coleção
           </h2>
         </motion.div>
 
-        <ProductDenseGrid products={[...RECOMMENDATIONS]} size="compact" className="mt-5" />
+        <ProductDenseGrid products={[...RECOMMENDATIONS]} className="mt-6 sm:mt-7" />
       </div>
     </section>
   );

@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Flame } from "lucide-react";
-import { ProductCarousel } from "@/components/ui/ProductCarousel";
 import { ProductDenseGrid } from "@/components/ui/ProductDenseGrid";
 import { BEST_SELLERS } from "@/lib/products";
 import { fadeInUp } from "@/lib/motion";
@@ -37,15 +36,7 @@ export function BestSellers() {
           </Link>
         </motion.div>
 
-        <div className="mt-4 lg:hidden">
-          <ProductCarousel products={[...BEST_SELLERS]} />
-        </div>
-
-        <ProductDenseGrid
-          products={[...BEST_SELLERS]}
-          size="compact"
-          className="mt-4 hidden lg:grid"
-        />
+        <ProductDenseGrid products={[...BEST_SELLERS]} className="mt-4" />
       </div>
     </section>
   );

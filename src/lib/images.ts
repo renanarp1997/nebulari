@@ -1,12 +1,9 @@
-/** Fotos premium — produto metálico, joalheria e lifestyle (Unsplash) */
-const u = (id: string, w: number) =>
-  `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=92`;
-
+/** Imagens locais — evita dependência de CDN externa (404 / lentidão) */
 export const IMAGES = {
   hero: {
     main: "/imagens/17.jpg",
     detail: "/imagens/17.jpg",
-    surface: u("photo-1611591437281-460bf40a41e2", 1200),
+    surface: "/imagens/14.jpg",
   },
   showcaseHighlight: {
     src: "/imagens/13.jpg",
@@ -36,14 +33,14 @@ export const IMAGES = {
   why: [
     "/imagens/14.jpg",
     "/imagens/15.jpg",
-    u("photo-1515562141207-7a88fb7ce338", 800),
     "/imagens/16.jpg",
+    "/imagens/18.jpg",
   ],
   testimonials: {
     orbitaPrata: "/imagens/18.jpg",
     pixel: "/imagens/19.jpg",
     minimalArc: "/imagens/20.jpg",
   },
-  newsletter: u("photo-1446776811953-b2787eb43f05", 1920),
-  packaging: u("photo-1549465220-1a0b9238cd48", 1000),
+  newsletter: "/imagens/5.jpg",
+  packaging: "/imagens/14.jpg",
 } as const;

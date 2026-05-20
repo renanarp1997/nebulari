@@ -7,9 +7,9 @@ import { ProductCarousel } from "@/components/ui/ProductCarousel";
 import { NEW_ARRIVALS, BEST_SELLERS, TRENDING } from "@/lib/products";
 import { fadeInUp } from "@/lib/motion";
 
-const strip = [...NEW_ARRIVALS, ...TRENDING, ...BEST_SELLERS].filter(
-  (p, i, arr) => arr.findIndex((x) => x.id === p.id) === i
-);
+const strip = [...NEW_ARRIVALS, ...TRENDING, ...BEST_SELLERS]
+  .filter((p, i, arr) => arr.findIndex((x) => x.id === p.id) === i)
+  .slice(0, 8);
 
 export function ExploreStrip() {
   return (

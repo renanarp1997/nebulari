@@ -22,6 +22,8 @@ export function BenefitsBar() {
           src={IMAGES.packaging}
           alt=""
           fill
+          sizes="100vw"
+          loading="lazy"
           className="editorial-photo object-cover opacity-[0.05]"
           aria-hidden
         />

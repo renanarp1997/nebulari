@@ -6,7 +6,7 @@ import { ProductDenseGrid } from "@/components/ui/ProductDenseGrid";
 import { PRODUCTS } from "@/lib/products";
 import { fadeInUp } from "@/lib/motion";
 
-const bentoProducts = PRODUCTS.slice(0, 11);
+const bentoProducts = PRODUCTS.slice(0, 8);
 
 export function ProductShowcase() {
   return (
@@ -40,7 +40,6 @@ export function ProductShowcase() {
 
         <ProductDenseGrid
           products={bentoProducts}
-          size="compact"
           density="bento"
           className="mt-5"
         />
@@ -56,7 +55,7 @@ export function ProductShowcase() {
         >
           Blocos & colecionáveis
         </motion.p>
-        <ProductDenseGrid products={PRODUCTS.filter((p) => p.collectionId === "geek")} size="compact" />
+        <ProductDenseGrid products={PRODUCTS.filter((p) => p.collectionId === "geek")} />
       </div>
     </section>
   );

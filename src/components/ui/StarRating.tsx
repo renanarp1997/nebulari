@@ -13,7 +13,7 @@ export function StarRating({
 }) {
   if (dense) {
     return (
-      <p className="text-[10px] text-muted">
+      <p className="text-xs text-muted sm:text-[13px]">
         <span className="font-medium text-foreground">{rating.toFixed(1)}</span>
         {reviewCount !== undefined && (
           <span> · {reviewCount.toLocaleString("pt-BR")} avaliações</span>

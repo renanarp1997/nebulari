@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Loader2 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { AuthField } from "@/components/account/AuthField";
 import { validateLogin, validateRegister } from "@/lib/auth-validation";
+import { useScrollLock } from "@/hooks/useScrollLock";
 
 export function AuthModal() {
   const { modalOpen, modalView, closeModal, setModalView, login, register } = useAuth();
@@ -20,24 +21,27 @@ export function AuthModal() {
   const [formError, setFormError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (!modalOpen) {
-      setFieldErrors({});
-      setFormError("");
-      setLoading(false);
-    }
-  }, [modalOpen]);
+  const resetFormState = useCallback(() => {
+    setFieldErrors({});
+    setFormError("");
+    setLoading(false);
+  }, []);
+
+  const handleClose = useCallback(() => {
+    resetFormState();
+    closeModal();
+  }, [closeModal, resetFormState]);
+
+  useScrollLock(modalOpen);
 
   useEffect(() => {
-    if (modalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
+    if (!modalOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") handleClose();
     };
-  }, [modalOpen]);
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [modalOpen, handleClose]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,7 +53,11 @@ export function AuthModal() {
     setLoading(true);
     const result = await login(email.trim(), password);
     setLoading(false);
-    if (!result.ok) setFormError(result.error ?? "Erro ao entrar.");
+    if (result.ok) {
+      resetFormState();
+    } else {
+      setFormError(result.error ?? "Erro ao entrar.");
+    }
   };
 
   const handleRegister = async (e: React.FormEvent) => {
@@ -74,7 +82,11 @@ export function AuthModal() {
       marketing,
     });
     setLoading(false);
-    if (!result.ok) setFormError(result.error ?? "Erro ao criar conta.");
+    if (result.ok) {
+      resetFormState();
+    } else {
+      setFormError(result.error ?? "Erro ao criar conta.");
+    }
   };
 
   return (
@@ -88,7 +100,7 @@ export function AuthModal() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={closeModal}
+            onClick={handleClose}
           />
           <motion.div
             role="dialog"
@@ -99,10 +111,11 @@ export function AuthModal() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.98 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            onClick={(e) => e.stopPropagation()}
           >
             <button
               type="button"
-              onClick={closeModal}
+              onClick={handleClose}
               className="auth-modal-close"
               aria-label="Fechar"
             >

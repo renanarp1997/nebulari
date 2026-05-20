@@ -4,19 +4,49 @@ import { Footer } from "@/components/layout/Footer";
 import { Hero } from "@/components/sections/Hero";
 import { EditorialBanner } from "@/components/ui/EditorialBanner";
 import { BestSellers } from "@/components/sections/BestSellers";
-import { ProductCatalog } from "@/components/sections/ProductCatalog";
 import { CollectionDiscovery } from "@/components/sections/CollectionDiscovery";
-import { ProductShowcase } from "@/components/sections/ProductShowcase";
-import { ExploreStrip } from "@/components/sections/ExploreStrip";
-import { TrendingProducts } from "@/components/sections/TrendingProducts";
-import { CategoryLanes } from "@/components/sections/CategoryLanes";
 import { BenefitsBar } from "@/components/sections/BenefitsBar";
-import { Collections } from "@/components/sections/Collections";
-import { Recommendations } from "@/components/sections/Recommendations";
-import { WhyChoose } from "@/components/sections/WhyChoose";
-import { Testimonials } from "@/components/sections/Testimonials";
 import { Newsletter } from "@/components/sections/Newsletter";
+import { LazyWhenVisible } from "@/components/ui/LazyWhenVisible";
 import { IMAGES } from "@/lib/images";
+import dynamic from "next/dynamic";
+
+const ProductCatalog = dynamic(
+  () => import("@/components/sections/ProductCatalog").then((m) => m.ProductCatalog),
+  { loading: () => <div className="section-dense min-h-[480px] border-b border-border bg-background" /> }
+);
+const ProductShowcase = dynamic(
+  () => import("@/components/sections/ProductShowcase").then((m) => m.ProductShowcase),
+  { loading: () => <div className="section-dense min-h-[520px] border-b border-border bg-background-elevated" /> }
+);
+const ExploreStrip = dynamic(
+  () => import("@/components/sections/ExploreStrip").then((m) => m.ExploreStrip),
+  { loading: () => <div className="section-dense-tight min-h-[360px] border-b border-border" /> }
+);
+const TrendingProducts = dynamic(
+  () => import("@/components/sections/TrendingProducts").then((m) => m.TrendingProducts),
+  { loading: () => <div className="section-dense min-h-[380px] border-b border-border" /> }
+);
+const CategoryLanes = dynamic(
+  () => import("@/components/sections/CategoryLanes").then((m) => m.CategoryLanes),
+  { loading: () => <div className="section-dense min-h-[640px] border-b border-border bg-background-elevated" /> }
+);
+const Collections = dynamic(
+  () => import("@/components/sections/Collections").then((m) => m.Collections),
+  { loading: () => <div className="section-dense min-h-[480px] border-b border-border" /> }
+);
+const Recommendations = dynamic(
+  () => import("@/components/sections/Recommendations").then((m) => m.Recommendations),
+  { loading: () => <div className="section-dense min-h-[420px] border-b border-border" /> }
+);
+const WhyChoose = dynamic(
+  () => import("@/components/sections/WhyChoose").then((m) => m.WhyChoose),
+  { loading: () => <div className="section-dense min-h-[400px] border-b border-border" /> }
+);
+const Testimonials = dynamic(
+  () => import("@/components/sections/Testimonials").then((m) => m.Testimonials),
+  { loading: () => <div className="section-dense min-h-[360px] border-b border-border" /> }
+);
 
 export default function Home() {
   return (
@@ -41,7 +71,10 @@ export default function Home() {
 
         <BestSellers />
         <CollectionDiscovery />
-        <ProductCatalog />
+
+        <LazyWhenVisible minHeight={520}>
+          <ProductCatalog />
+        </LazyWhenVisible>
 
         <div className="section-dense-tight border-b border-border bg-background-elevated py-4">
           <EditorialBanner
@@ -57,9 +90,15 @@ export default function Home() {
           />
         </div>
 
-        <ProductShowcase />
-        <ExploreStrip />
-        <TrendingProducts />
+        <LazyWhenVisible minHeight={560}>
+          <ProductShowcase />
+        </LazyWhenVisible>
+        <LazyWhenVisible minHeight={380}>
+          <ExploreStrip />
+        </LazyWhenVisible>
+        <LazyWhenVisible minHeight={400}>
+          <TrendingProducts />
+        </LazyWhenVisible>
 
         <div className="section-dense-tight border-b border-border py-4">
           <EditorialBanner
@@ -74,12 +113,22 @@ export default function Home() {
           />
         </div>
 
-        <CategoryLanes />
+        <LazyWhenVisible minHeight={720}>
+          <CategoryLanes />
+        </LazyWhenVisible>
         <BenefitsBar />
-        <Collections />
-        <Recommendations />
-        <WhyChoose />
-        <Testimonials />
+        <LazyWhenVisible minHeight={480}>
+          <Collections />
+        </LazyWhenVisible>
+        <LazyWhenVisible minHeight={520}>
+          <Recommendations />
+        </LazyWhenVisible>
+        <LazyWhenVisible minHeight={420}>
+          <WhyChoose />
+        </LazyWhenVisible>
+        <LazyWhenVisible minHeight={380}>
+          <Testimonials />
+        </LazyWhenVisible>
         <Newsletter />
       </main>
       <Footer />

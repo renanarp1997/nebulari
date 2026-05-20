@@ -29,7 +29,7 @@ export function AddToCartButton({
       <button
         type="button"
         onClick={handleClick}
-        className="ecom-add-slim flex w-full items-center justify-center gap-1 bg-foreground py-1.5 text-[9px] font-bold uppercase tracking-wider text-white transition hover:bg-accent"
+        className="ecom-add-slim flex w-full min-h-[2.5rem] items-center justify-center gap-1.5 bg-foreground py-2 text-[10px] font-bold uppercase tracking-wider text-white transition hover:bg-accent sm:min-h-[2.75rem] sm:text-[11px]"
       >
         {added ? <Check className="h-3 w-3" /> : <ShoppingBag className="h-3 w-3" strokeWidth={2} />}
         {added ? "Ok" : "Adicionar"}

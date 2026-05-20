@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Cormorant_Garamond, Sora } from "next/font/google";
 import { StoreProvider } from "@/components/providers/StoreProvider";
 import "./globals.css";
 
@@ -9,10 +9,10 @@ const cormorant = Cormorant_Garamond({
   weight: ["400", "500", "600", "700"],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const sora = Sora({
+  variable: "--font-sora",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -33,8 +33,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${cormorant.variable} ${inter.variable} scroll-smooth`}>
-      <body className="texture-studio min-h-screen antialiased">
+    <html lang="pt-BR" className={`${cormorant.variable} ${sora.variable} scroll-smooth`}>
+      <body className="texture-studio min-h-screen font-sans antialiased">
         <StoreProvider>{children}</StoreProvider>
       </body>
     </html>

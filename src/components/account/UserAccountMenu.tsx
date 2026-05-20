@@ -27,6 +27,7 @@ export function UserAccountMenu() {
   const { user, openLogin, openRegister, logout } = useAuth();
 
   useEffect(() => {
+    if (!open) return;
     const onPointerDown = (e: MouseEvent) => {
       if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
         setOpen(false);
@@ -41,7 +42,7 @@ export function UserAccountMenu() {
       document.removeEventListener("mousedown", onPointerDown);
       document.removeEventListener("keydown", onEscape);
     };
-  }, []);
+  }, [open]);
 
   const closeAnd = (fn: () => void) => {
     setOpen(false);

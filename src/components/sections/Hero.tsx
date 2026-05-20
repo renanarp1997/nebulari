@@ -2,9 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useIsMobile } from "@/hooks/useIsMobile";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { CinematicAtmosphere } from "@/components/ui/CinematicAtmosphere";
 import { EditorialTreatment } from "@/components/ui/EditorialTreatment";
@@ -14,29 +12,19 @@ import { IMAGES } from "@/lib/images";
 import { fadeInUp, staggerContainer } from "@/lib/motion";
 
 export function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  const isMobile = useIsMobile();
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, isMobile ? 0 : 48]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, isMobile ? 1 : 1.06]);
-
   return (
     <section
-      ref={sectionRef}
       id="inicio"
       className="relative overflow-hidden border-b border-border bg-[var(--studio-cream)]"
     >
       <div className="film-grain relative">
         <div className="hero-atmo-layer" aria-hidden />
-        <CinematicAtmosphere variant="minimal" intensity="rich" />
+        <CinematicAtmosphere variant="minimal" intensity="soft" />
 
         <motion.div
           className="mx-auto grid max-w-[1400px] lg:grid-cols-12 lg:min-h-[92vh]"
           variants={staggerContainer}
-          initial="hidden"
+          initial={false}
           animate="visible"
         >
           <motion.div
@@ -103,10 +91,7 @@ export function Hero() {
               <div className="hero-necklace-glow" aria-hidden />
               <div className="hero-product-shadow" aria-hidden />
 
-              <motion.div
-                style={{ y: imageY, scale: imageScale }}
-                className="absolute inset-0 z-[2]"
-              >
+              <div className="absolute inset-0 z-[2]">
                 <Image
                   src={IMAGES.hero.main}
                   alt="Colar lua crescente com pedra galáxia em caixa premium"
@@ -115,17 +100,9 @@ export function Hero() {
                   sizes="(max-width: 1024px) 100vw, 60vw"
                   className="editorial-photo-warm object-cover object-center transition duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
                 />
-              </motion.div>
-
-              <div className="hero-reflection-layer hidden sm:block" aria-hidden>
-                <Image
-                  src={IMAGES.hero.main}
-                  alt=""
-                  fill
-                  className="product-reflection editorial-photo-warm object-cover object-center opacity-60"
-                  aria-hidden
-                />
               </div>
+
+              <div className="hero-reflection-layer hidden sm:block" aria-hidden />
 
               <EditorialTreatment variant="hero" />
               <div className="hero-panel-dark" aria-hidden />

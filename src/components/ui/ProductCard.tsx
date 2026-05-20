@@ -1,24 +1,25 @@
 "use client";
 
+import { memo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { Truck } from "lucide-react";
 import type { Product } from "@/lib/products";
 import { getAtmosphere, ATMOSPHERE_META } from "@/lib/atmosphere";
 import { ProductBadge } from "@/components/ui/ProductBadge";
 import { StarRating } from "@/components/ui/StarRating";
 import { AddToCartButton } from "@/components/ui/AddToCartButton";
-import { scaleIn } from "@/lib/motion";
 
 export type ProductCardSize = "compact" | "standard" | "carousel";
 
-export function ProductCard({
+function ProductCardInner({
   product,
   size = "standard",
+  priorityImage = false,
 }: {
   product: Product;
   size?: ProductCardSize;
+  priorityImage?: boolean;
 }) {
   const isCompact = size === "compact";
   const isCarousel = size === "carousel";
@@ -32,12 +33,11 @@ export function ProductCard({
       : "h-full";
 
   const aspectClass = isCompact || isCarousel ? "aspect-square" : "aspect-[4/5]";
-  const imagePadding = isCompact ? "p-2 sm:p-3" : isCarousel ? "p-3" : "p-5";
-  const bodyPadding = isCompact ? "p-2.5 sm:p-3" : isCarousel ? "p-2.5" : "p-4 sm:p-5";
+  const imagePadding = isCompact ? "p-3 sm:p-4" : isCarousel ? "p-3" : "p-5";
+  const bodyPadding = isCompact ? "p-3.5 sm:p-4" : isCarousel ? "p-2.5" : "p-4 sm:p-5";
 
   return (
-    <motion.article
-      variants={scaleIn}
+    <article
       className={`ecom-card-${size} luxury-product-card ecom-product-card group relative flex flex-col overflow-hidden border border-border/70 bg-background-elevated ${widthClass}`}
     >
       <Link href={product.href} className="relative block overflow-hidden">
@@ -50,7 +50,7 @@ export function ProductCard({
             />
           )}
           {product.badge && (
-            <div className={`absolute z-10 ${isCompact ? "left-1.5 top-1.5" : "left-2 top-2 sm:left-3 sm:top-3"}`}>
+            <div className={`absolute z-10 ${isCompact ? "left-2 top-2 sm:left-2.5 sm:top-2.5" : "left-2 top-2 sm:left-3 sm:top-3"}`}>
               <ProductBadge variant={product.badge} />
             </div>
           )}
@@ -58,14 +58,16 @@ export function ProductCard({
             src={product.image}
             alt={product.alt}
             fill
+            priority={priorityImage}
+            loading={priorityImage ? undefined : "lazy"}
             sizes={
               isCarousel
-                ? "168px"
+                ? "300px"
                 : isCompact
-                  ? "(max-width: 640px) 50vw, 16vw"
-                  : "(max-width: 640px) 50vw, 25vw"
+                  ? "(max-width: 640px) 50vw, 22vw"
+                  : "(max-width: 640px) 50vw, 280px"
             }
-            className={`relative z-[2] object-contain object-center ${imagePadding} editorial-photo-soft transition duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.05]`}
+            className={`relative z-[2] object-contain object-center ${imagePadding} editorial-photo-soft transition duration-300 ease-out group-hover:scale-[1.04]`}
           />
           <div className="product-shine" aria-hidden />
           <div className="absolute inset-0 z-[3] bg-foreground/0 transition duration-300 group-hover:bg-foreground/[0.03]" />
@@ -91,7 +93,7 @@ export function ProductCard({
           <h3
             className={`font-semibold leading-snug text-foreground transition duration-300 hover:text-accent ${
               isCompact
-                ? "mt-0 line-clamp-2 text-[13px]"
+                ? "mt-0 line-clamp-2 font-display text-[15px] sm:text-base"
                 : isCarousel
                   ? "mt-0 line-clamp-2 font-display text-base"
                   : "mt-1 font-display text-lg sm:text-xl"
@@ -101,7 +103,7 @@ export function ProductCard({
           </h3>
         </Link>
 
-        <div className={isCompact ? "mt-1" : "mt-2"}>
+        <div className={isCompact ? "mt-1.5" : "mt-2"}>
           <StarRating
             rating={product.rating}
             reviewCount={product.reviewCount}
@@ -110,14 +112,14 @@ export function ProductCard({
           />
         </div>
 
-        <div className={`flex flex-wrap items-baseline gap-1.5 ${isCompact ? "mt-1" : "mt-2"}`}>
+        <div className={`flex flex-wrap items-baseline gap-1.5 ${isCompact ? "mt-1.5" : "mt-2"}`}>
           <span
-            className={`font-semibold text-foreground ${isCompact ? "text-sm" : "font-display text-xl"}`}
+            className={`font-semibold text-foreground ${isCompact ? "font-display text-base sm:text-lg" : "font-display text-xl"}`}
           >
             {product.priceLabel}
           </span>
           {product.compareAtPrice && (
-            <span className={`text-muted line-through ${isCompact ? "text-[10px]" : "text-sm"}`}>
+            <span className={`text-muted line-through ${isCompact ? "text-xs" : "text-sm"}`}>
               {product.compareAtPrice}
             </span>
           )}
@@ -141,7 +143,7 @@ export function ProductCard({
         )}
 
         {isCompact && (
-          <div className="mt-2">
+          <div className="mt-3">
             <AddToCartButton
               productId={product.id}
               productName={product.name}
@@ -150,6 +152,8 @@ export function ProductCard({
           </div>
         )}
       </div>
-    </motion.article>
+    </article>
   );
 }
+
+export const ProductCard = memo(ProductCardInner);
