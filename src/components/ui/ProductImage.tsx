@@ -47,10 +47,10 @@ export function ProductImage({
           alt={alt}
           fill
           priority={priority}
-          quality={priority ? 75 : 60}
+          quality={priority ? 72 : 58}
           loading={priority ? undefined : "lazy"}
           sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 400px"
-          className="editorial-photo object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
+          className="editorial-photo object-cover max-md:transition-none sm:transition sm:duration-500 sm:ease-out sm:group-hover:scale-[1.03]"
         />
         {overlay !== "none" && (
           <div
@@ -61,7 +61,7 @@ export function ProductImage({
       </div>
 
       {showReflection && (
-        <div className="relative -mt-1 h-16 overflow-hidden opacity-30 sm:h-20">
+        <div className="relative -mt-1 hidden h-16 overflow-hidden opacity-30 sm:block sm:h-20">
           <div className="product-reflection absolute inset-0 scale-y-[-1]">
             <Image
               src={src}

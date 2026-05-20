@@ -8,11 +8,24 @@ type RevealProps = {
   delayMs?: number;
 };
 
+function prefersLiteMotion() {
+  if (typeof window === "undefined") return false;
+  return (
+    window.matchMedia("(max-width: 639px)").matches ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  );
+}
+
 export function Reveal({ children, className = "", delayMs = 0 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    if (prefersLiteMotion()) {
+      setVisible(true);
+      return;
+    }
+
     const el = ref.current;
     if (!el || visible) return;
 

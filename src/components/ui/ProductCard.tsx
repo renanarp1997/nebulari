@@ -58,16 +58,16 @@ function ProductCardInner({
             alt={product.alt}
             fill
             priority={priorityImage}
-            quality={priorityImage ? 75 : 65}
+            quality={priorityImage ? 72 : 58}
             loading={priorityImage ? undefined : "lazy"}
             sizes={
               isCarousel
-                ? "300px"
+                ? "168px"
                 : isCompact
-                  ? "(max-width: 640px) 50vw, 22vw"
-                  : "(max-width: 640px) 50vw, 280px"
+                  ? "(max-width: 640px) 45vw, 200px"
+                  : "(max-width: 640px) 45vw, 280px"
             }
-            className={`absolute inset-0 z-[2] object-contain object-center ${imagePadding} editorial-photo-soft transition duration-300 ease-out group-hover:scale-[1.03]`}
+            className={`absolute inset-0 z-[2] object-contain object-center ${imagePadding} editorial-photo-soft max-md:transition-none sm:transition sm:duration-300 sm:ease-out sm:group-hover:scale-[1.03]`}
           />
           {(discount !== null && discount > 0) || product.badge ? (
             <div className="ecom-card-badges">

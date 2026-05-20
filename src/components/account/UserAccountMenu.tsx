@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   User,
   LogIn,
@@ -71,85 +70,76 @@ export function UserAccountMenu() {
         />
       </button>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            role="menu"
-            initial={{ opacity: 0, y: 8, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 6, scale: 0.98 }}
-            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="account-dropdown"
-          >
-            {user ? (
-              <>
-                <div className="account-dropdown-header">
-                  <p className="account-dropdown-hello">Olá,</p>
-                  <p className="account-dropdown-name">{user.name}</p>
-                  <p className="account-dropdown-email">{user.email}</p>
-                </div>
-                <div className="account-dropdown-divider" />
-                {MENU_LINKS.map(({ label, href, icon: Icon }) => (
-                  <Link
-                    key={label}
-                    href={href}
-                    role="menuitem"
-                    onClick={() => setOpen(false)}
-                    className="account-dropdown-item"
-                  >
-                    <Icon className="h-4 w-4 shrink-0 opacity-70" strokeWidth={1.5} />
-                    {label}
-                  </Link>
-                ))}
-                <div className="account-dropdown-divider" />
-                <button
-                  type="button"
+      {open && (
+        <div role="menu" className="account-dropdown account-dropdown-enter">
+          {user ? (
+            <>
+              <div className="account-dropdown-header">
+                <p className="account-dropdown-hello">Olá,</p>
+                <p className="account-dropdown-name">{user.name}</p>
+                <p className="account-dropdown-email">{user.email}</p>
+              </div>
+              <div className="account-dropdown-divider" />
+              {MENU_LINKS.map(({ label, href, icon: Icon }) => (
+                <Link
+                  key={label}
+                  href={href}
                   role="menuitem"
-                  onClick={() => closeAnd(logout)}
-                  className="account-dropdown-item w-full text-left"
+                  onClick={() => setOpen(false)}
+                  className="account-dropdown-item"
                 >
-                  <LogOut className="h-4 w-4 shrink-0 opacity-70" strokeWidth={1.5} />
-                  Sair
-                </button>
-              </>
-            ) : (
-              <>
-                <button
-                  type="button"
+                  <Icon className="h-4 w-4 shrink-0 opacity-70" strokeWidth={1.5} />
+                  {label}
+                </Link>
+              ))}
+              <div className="account-dropdown-divider" />
+              <button
+                type="button"
+                role="menuitem"
+                onClick={() => closeAnd(logout)}
+                className="account-dropdown-item w-full text-left"
+              >
+                <LogOut className="h-4 w-4 shrink-0 opacity-70" strokeWidth={1.5} />
+                Sair
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                type="button"
+                role="menuitem"
+                onClick={() => closeAnd(openLogin)}
+                className="account-dropdown-item w-full text-left font-semibold"
+              >
+                <LogIn className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+                Entrar
+              </button>
+              <button
+                type="button"
+                role="menuitem"
+                onClick={() => closeAnd(openRegister)}
+                className="account-dropdown-item w-full text-left"
+              >
+                <UserPlus className="h-4 w-4 shrink-0" strokeWidth={1.5} />
+                Criar conta
+              </button>
+              <div className="account-dropdown-divider" />
+              {MENU_LINKS.map(({ label, href, icon: Icon }) => (
+                <Link
+                  key={label}
+                  href={href}
                   role="menuitem"
-                  onClick={() => closeAnd(openLogin)}
-                  className="account-dropdown-item w-full text-left font-semibold"
+                  onClick={() => setOpen(false)}
+                  className="account-dropdown-item"
                 >
-                  <LogIn className="h-4 w-4 shrink-0" strokeWidth={1.5} />
-                  Entrar
-                </button>
-                <button
-                  type="button"
-                  role="menuitem"
-                  onClick={() => closeAnd(openRegister)}
-                  className="account-dropdown-item w-full text-left"
-                >
-                  <UserPlus className="h-4 w-4 shrink-0" strokeWidth={1.5} />
-                  Criar conta
-                </button>
-                <div className="account-dropdown-divider" />
-                {MENU_LINKS.map(({ label, href, icon: Icon }) => (
-                  <Link
-                    key={label}
-                    href={href}
-                    role="menuitem"
-                    onClick={() => setOpen(false)}
-                    className="account-dropdown-item"
-                  >
-                    <Icon className="h-4 w-4 shrink-0 opacity-70" strokeWidth={1.5} />
-                    {label}
-                  </Link>
-                ))}
-              </>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+                  <Icon className="h-4 w-4 shrink-0 opacity-70" strokeWidth={1.5} />
+                  {label}
+                </Link>
+              ))}
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 }

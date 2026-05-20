@@ -1,17 +1,20 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CollectionAmbience } from "@/components/ui/CollectionAmbience";
 import { COLLECTIONS } from "@/lib/constants";
 import { COLLECTION_VISUALS } from "@/lib/collectionVisuals";
-import { fadeInUp, staggerContainer } from "@/lib/motion";
 
 type Collection = (typeof COLLECTIONS)[number];
 type CollectionId = keyof typeof COLLECTION_VISUALS;
+
+const ENTER_DELAYS = [
+  "",
+  "collection-card-enter-delay-1",
+  "collection-card-enter-delay-2",
+  "collection-card-enter-delay-3",
+] as const;
 
 function formatProductCount(count: number) {
   return `${count} ${count === 1 ? "peça" : "peças"}`;
@@ -35,13 +38,15 @@ function CollectionMedia({
       <CollectionAmbience collectionId={id as CollectionId} />
 
       <div className={`collection-product-stage ${visual.padding}`}>
-        <div className="collection-product-shadow" aria-hidden />
+        <div className="collection-product-shadow max-lg:opacity-80" aria-hidden />
         <Image
           src={src}
           alt={alt}
           fill
+          loading="lazy"
+          quality={65}
           sizes={sizes}
-          className={`relative z-[2] ${visual.fit} transition duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] ${visual.photoClass} ${visual.objectPosition} ${visual.scale}`}
+          className={`relative z-[2] ${visual.fit} max-md:transition-none sm:transition sm:duration-700 sm:ease-[cubic-bezier(0.22,1,0.36,1)] ${visual.photoClass} ${visual.objectPosition} ${visual.scale}`}
         />
       </div>
 
@@ -145,7 +150,7 @@ function CollectionMeta({
         </div>
 
         <span
-          className="hidden h-11 w-11 shrink-0 items-center justify-center border border-white/30 bg-white/10 text-white backdrop-blur-sm sm:flex"
+          className="hidden h-11 w-11 shrink-0 items-center justify-center border border-white/30 bg-white/10 text-white backdrop-blur-sm sm:flex max-lg:backdrop-blur-none max-lg:bg-white/15"
           aria-hidden
         >
           <ArrowUpRight className="h-4 w-4" />
@@ -159,15 +164,17 @@ function CollectionCard({
   collection,
   featured = false,
   className,
+  enterClass = "",
 }: {
   collection: Collection;
   featured?: boolean;
   className: string;
+  enterClass?: string;
 }) {
   const visual = COLLECTION_VISUALS[collection.id as CollectionId];
 
   return (
-    <motion.article variants={fadeInUp} className={className}>
+    <article className={`${className} ${enterClass}`.trim()}>
       <Link
         href={collection.href}
         className="group collection-card-lift block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
@@ -192,12 +199,14 @@ function CollectionCard({
           <CollectionMeta collection={collection} featured={featured} />
         </div>
       </Link>
-    </motion.article>
+    </article>
   );
 }
 
 export function Collections() {
   const [featured, ...rest] = COLLECTIONS;
+  const gridClass =
+    "mt-6 grid gap-3 sm:mt-10 sm:gap-4 lg:grid-cols-12 lg:grid-rows-2 lg:gap-5";
 
   return (
     <section id="colecoes" className="section-dense relative overflow-hidden border-b border-border bg-background">
@@ -209,27 +218,22 @@ export function Collections() {
           description="Quatro categorias para comprar agora. Mesmo padrão de acabamento, curadoria de boutique."
         />
 
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          className="mt-6 grid gap-3 sm:mt-10 sm:gap-4 lg:grid-cols-12 lg:grid-rows-2 lg:gap-5"
-        >
+        <div className={gridClass}>
           <CollectionCard
             collection={featured}
             featured
+            enterClass="max-md:opacity-100 lg:collection-card-enter"
             className="lg:col-span-7 lg:row-span-2"
           />
-
-          {rest.map((col) => (
+          {rest.map((col, index) => (
             <CollectionCard
               key={col.id}
               collection={col}
+              enterClass={`max-md:opacity-100 lg:collection-card-enter ${ENTER_DELAYS[index + 1] ?? ""}`}
               className="lg:col-span-5"
             />
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

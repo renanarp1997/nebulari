@@ -6,7 +6,7 @@ import { SectionActionLink } from "@/components/ui/SectionActionLink";
 import { ProductDenseGrid } from "@/components/ui/ProductDenseGrid";
 import { CATALOG_ALL } from "@/lib/products";
 
-const INITIAL_COUNT = 8;
+const INITIAL_COUNT = 6;
 const LOAD_MORE_STEP = 8;
 
 export function ProductCatalog() {

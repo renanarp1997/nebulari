@@ -59,12 +59,30 @@ html {
   font-size: 16px;
 }
 
-/* Performance — seções fora da tela não bloqueiam pintura */
+/* Performance — seções fora da tela (desktop); no mobile evita scroll preso no Safari */
 main > section,
 main > div[class*="section-"],
 .lazy-section-boundary {
   content-visibility: auto;
   contain-intrinsic-size: auto 420px;
+}
+
+@media (max-width: 1023px) {
+  main > section,
+  main > div[class*="section-"],
+  .lazy-section-boundary,
+  .section-dense,
+  .section-dense-tight {
+    content-visibility: visible;
+    contain-intrinsic-size: unset;
+  }
+
+  .atmo-specular-sweep,
+  .light-particle,
+  .atmo-collection-rim,
+  .atmo-collection-shine {
+    display: none !important;
+  }
 }
 
 .luxury-product-card {
@@ -131,7 +149,14 @@ html {
   .hero-enter,
   .hero-enter-delay-1,
   .hero-enter-delay-2,
-  .hero-enter-delay-3 {
+  .hero-enter-delay-3,
+  .collection-card-enter,
+  .collection-card-enter-delay-1,
+  .collection-card-enter-delay-2,
+  .collection-card-enter-delay-3,
+  .ui-panel-enter,
+  .account-dropdown-enter,
+  .ecom-toast-enter {
     animation: none;
   }
 }
@@ -1221,6 +1246,70 @@ label,
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Overlays — animação CSS (sem framer-motion) */
+@keyframes ui-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes ui-panel-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes ui-dropdown-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.ui-overlay-fade {
+  animation: ui-fade-in 0.25s ease both;
+}
+
+.ui-panel-enter {
+  animation: ui-panel-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.account-dropdown-enter {
+  animation: ui-dropdown-in 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.ecom-toast-enter {
+  animation: ecom-toast-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.collection-card-enter {
+  animation: hero-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.collection-card-enter-delay-1 {
+  animation-delay: 0.08s;
+}
+
+.collection-card-enter-delay-2 {
+  animation-delay: 0.14s;
+}
+
+.collection-card-enter-delay-3 {
+  animation-delay: 0.2s;
 }
 
 /* ═══════════════════════════════════════════
@@ -3108,8 +3197,22 @@ body {
   .hero-enter-delay-1,
   .hero-enter-delay-2,
   .hero-enter-delay-3,
-  .hero-floating-card-wrap {
+  .hero-floating-card-wrap,
+  .collection-card-enter,
+  .collection-card-enter-delay-1,
+  .collection-card-enter-delay-2,
+  .collection-card-enter-delay-3 {
     animation: none;
+  }
+
+  .editorial-photo,
+  .editorial-photo-soft,
+  .editorial-photo-warm,
+  .collection-photo-espaciais,
+  .collection-photo-anime,
+  .collection-photo-minimal,
+  .collection-photo-geek {
+    filter: saturate(0.92) contrast(1.04);
   }
 
   .luxury-product-card,
