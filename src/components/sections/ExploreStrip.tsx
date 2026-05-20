@@ -14,7 +14,7 @@ const strip = [...NEW_ARRIVALS, ...TRENDING, ...BEST_SELLERS]
 export function ExploreStrip() {
   return (
     <section className="section-dense-tight border-b border-border bg-[var(--studio-cream)]">
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
+      <div className="site-container">
         <motion.div
           variants={fadeInUp}
           initial="hidden"

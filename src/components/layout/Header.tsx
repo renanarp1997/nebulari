@@ -33,58 +33,54 @@ export function Header() {
 
   return (
     <header
-      className={`site-header sticky z-50 transition-all duration-300 ${
-        scrolled
-          ? "border-b border-border/80 bg-background-elevated/95 shadow-sm backdrop-blur-md"
-          : "border-b border-transparent bg-background/80 backdrop-blur-sm"
+      className={`site-header sticky z-50 w-full border-b border-border bg-background-elevated transition-shadow duration-300 ${
+        scrolled ? "shadow-sm" : ""
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-[1400px] items-center gap-3 px-5 sm:h-[4.5rem] sm:gap-4 sm:px-8">
+      <div className="site-container site-header-inner">
         <Link
           href="#inicio"
-          className="shrink-0 font-display text-xl font-semibold tracking-tight text-foreground sm:text-2xl"
+          className="site-header-logo shrink-0 font-display font-semibold tracking-tight text-foreground"
         >
           Nebulari
         </Link>
 
         <Link
           href="#catalogo"
-          className="header-search hidden min-w-0 flex-1 md:flex"
+          className="header-search hidden min-w-0 md:flex"
           aria-label="Buscar no catálogo"
         >
-          <Search className="h-[18px] w-[18px] shrink-0 text-muted" strokeWidth={1.5} />
-          <span className="truncate text-sm text-muted">Buscar produtos, coleções, marcas…</span>
+          <Search strokeWidth={1.5} />
+          <span className="header-search-placeholder truncate text-muted">
+            Buscar produtos, coleções, marcas…
+          </span>
         </Link>
 
-        <nav className="hidden shrink-0 items-center gap-6 lg:flex xl:gap-8">
+        <nav className="site-header-nav hidden shrink-0 lg:flex">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted transition hover:text-foreground"
+              className="uppercase text-muted transition hover:text-foreground"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="ml-auto flex shrink-0 items-center gap-0.5">
+        <div className="site-header-actions shrink-0">
           <Link
             href="#catalogo"
             aria-label="Buscar"
-            className="relative flex h-11 w-11 items-center justify-center text-foreground transition hover:text-accent md:hidden"
+            className="header-icon-btn md:hidden"
           >
-            <Search className="h-[18px] w-[18px]" strokeWidth={1.5} />
+            <Search strokeWidth={1.5} />
           </Link>
           <UserAccountMenu />
-          <button
-            type="button"
-            aria-label="Carrinho"
-            className="relative flex h-11 w-11 items-center justify-center text-foreground transition hover:text-accent"
-          >
-            <ShoppingBag className="h-[18px] w-[18px]" strokeWidth={1.5} />
+          <button type="button" aria-label="Carrinho" className="header-icon-btn relative">
+            <ShoppingBag strokeWidth={1.5} />
             {count > 0 && (
-              <span className="absolute right-1 top-1 flex h-4 min-w-4 items-center justify-center bg-accent px-1 text-[9px] font-bold text-white">
+              <span className="absolute right-1.5 top-1.5 flex h-4 min-w-4 items-center justify-center bg-accent px-1 text-[9px] font-bold text-white">
                 {count > 9 ? "9+" : count}
               </span>
             )}
@@ -92,10 +88,10 @@ export function Header() {
           <button
             type="button"
             aria-label="Menu"
-            className="flex h-11 w-11 items-center justify-center lg:hidden"
+            className="header-icon-btn header-menu-btn lg:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {mobileOpen ? <X strokeWidth={1.5} /> : <Menu strokeWidth={1.5} />}
           </button>
         </div>
       </div>
@@ -108,7 +104,7 @@ export function Header() {
             exit={{ height: 0, opacity: 0 }}
             className="overflow-hidden border-t border-border bg-background-elevated lg:hidden"
           >
-            <nav className="flex flex-col px-5 py-4">
+            <nav className="site-container flex flex-col py-2">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}

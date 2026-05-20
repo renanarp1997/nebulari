@@ -47,7 +47,7 @@ export function Newsletter() {
           />
           <div className="film-grain film-grain-rich absolute inset-0" />
 
-          <div className="relative mx-auto flex min-h-[380px] w-full max-w-[1400px] flex-col justify-center px-5 py-10 sm:min-h-[400px] sm:px-8 sm:py-14 lg:min-h-[420px] lg:px-12 lg:py-16">
+          <div className="relative site-container flex min-h-[380px] w-full flex-col justify-center px-5 py-10 sm:min-h-[400px] sm:px-8 sm:py-14 lg:min-h-[420px] lg:px-12 lg:py-16">
             <div className="w-full max-w-xl lg:max-w-2xl">
               <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-white/60">
                 <Sparkles className="h-3.5 w-3.5 text-[var(--gold-muted)]" strokeWidth={1.5} />

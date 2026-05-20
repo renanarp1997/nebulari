@@ -10,7 +10,7 @@ import { fadeInUp } from "@/lib/motion";
 export function BestSellers() {
   return (
     <section id="mais-vendidos" className="section-dense border-b border-border bg-background-elevated">
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-8">
+      <div className="site-container">
         <motion.div
           variants={fadeInUp}
           initial="hidden"

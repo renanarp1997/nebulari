@@ -11,7 +11,7 @@ import { fadeInUp, staggerContainer } from "@/lib/motion";
 export function Testimonials() {
   return (
     <section id="depoimentos" className="section-dense bg-background-elevated">
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
+      <div className="site-container">
         <SectionHeading
           eyebrow="Clientes"
           title="Quem comprou, voltou"

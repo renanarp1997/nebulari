@@ -16,7 +16,7 @@ export function WhyChoose() {
       className="section-dense border-y border-border bg-[var(--studio-cream)]"
     >
       <motion.div
-        className="mx-auto max-w-[1400px] px-5 sm:px-8"
+        className="site-container"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}

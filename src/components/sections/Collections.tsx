@@ -202,7 +202,7 @@ export function Collections() {
   return (
     <section id="colecoes" className="section-dense relative overflow-hidden border-b border-border bg-background">
       <div className="atmo-section-bg pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_100%_60%_at_50%_0%,rgba(255,252,248,0.8)_0%,transparent_55%)]" aria-hidden />
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 relative z-10">
+      <div className="site-container relative z-10">
         <SectionHeading
           eyebrow="Coleções"
           title="Nossas coleções"

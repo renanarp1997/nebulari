@@ -35,7 +35,7 @@ export function EditorialBanner({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-40px" }}
-      className="mx-auto max-w-[1400px] px-5 sm:px-8"
+      className="site-container"
     >
       <Link
         href={href}

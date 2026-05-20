@@ -11,7 +11,7 @@ const bentoProducts = PRODUCTS.slice(0, 8);
 export function ProductShowcase() {
   return (
     <section id="destaques" className="section-dense border-b border-border bg-background-elevated">
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
+      <div className="site-container">
         <motion.div
           variants={fadeInUp}
           initial="hidden"
@@ -45,7 +45,7 @@ export function ProductShowcase() {
         />
       </div>
 
-      <div id="galeria-pecas" className="mx-auto mt-6 max-w-[1400px] px-5 sm:mt-8 sm:px-8">
+      <div id="galeria-pecas" className="site-container mt-6 sm:mt-8">
         <motion.p
           variants={fadeInUp}
           initial="hidden"

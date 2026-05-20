@@ -8,7 +8,7 @@ import { fadeInUp } from "@/lib/motion";
 export function Recommendations() {
   return (
     <section id="recomendados" className="section-dense border-b border-border bg-[var(--studio-cream)]">
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-8">
+      <div className="site-container">
         <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-accent">
             Para você

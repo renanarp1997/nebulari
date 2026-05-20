@@ -28,7 +28,7 @@ export function BenefitsBar() {
           aria-hidden
         />
       </div>
-      <div className="relative mx-auto max-w-[1400px] px-4 py-8 sm:px-8 sm:py-14">
+      <div className="relative site-container px-4 py-8 sm:px-8 sm:py-14">
         <motion.div
           variants={staggerContainer}
           initial="hidden"

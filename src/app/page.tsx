@@ -52,9 +52,11 @@ const Testimonials = dynamic(
 export default function Home() {
   return (
     <>
-      <AnnouncementBar />
-      <Header />
-      <MarketplaceTrustBar />
+      <div className="site-chrome">
+        <AnnouncementBar />
+        <Header />
+        <MarketplaceTrustBar />
+      </div>
       <main className="texture-studio overflow-x-hidden">
         <Hero />
 

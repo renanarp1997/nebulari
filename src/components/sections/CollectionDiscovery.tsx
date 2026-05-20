@@ -19,7 +19,7 @@ const chipAtmo: Record<string, string> = {
 export function CollectionDiscovery() {
   return (
     <section id="descobrir" className="section-dense-tight border-b border-border bg-background py-6 sm:py-8">
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-8">
+      <div className="site-container">
         <motion.div
           variants={fadeInUp}
           initial="hidden"

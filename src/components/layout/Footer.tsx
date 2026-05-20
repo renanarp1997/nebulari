@@ -22,7 +22,7 @@ export function Footer() {
         whileInView="visible"
         viewport={{ once: true }}
         variants={staggerContainer}
-        className="mx-auto max-w-[1400px] px-4 py-10 sm:px-8 sm:py-16"
+        className="site-container px-4 py-10 sm:px-8 sm:py-16"
       >
         <motion.div
           variants={fadeInUp}

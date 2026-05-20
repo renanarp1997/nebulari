@@ -16,7 +16,7 @@ export function ProductCatalog() {
 
   return (
     <section id="catalogo" className="section-dense border-b border-border bg-background">
-      <div className="mx-auto max-w-[1400px] px-4 sm:px-8">
+      <div className="site-container">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-accent">

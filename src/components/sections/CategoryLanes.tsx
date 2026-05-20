@@ -21,7 +21,7 @@ function getLaneProducts(collectionId: string): Product[] {
 export function CategoryLanes() {
   return (
     <section id="corredores" className="section-dense border-b border-border bg-background-elevated">
-      <div className="mx-auto max-w-[1400px] space-y-6 px-5 sm:space-y-8 sm:px-8">
+      <div className="site-container space-y-6 px-5 sm:space-y-8 sm:px-8">
         {LANES.map((lane, index) => {
           const col = COLLECTIONS.find((c) => c.id === lane.collectionId);
           const products = getLaneProducts(lane.collectionId);

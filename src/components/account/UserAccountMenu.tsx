@@ -57,11 +57,11 @@ export function UserAccountMenu() {
         aria-label="Minha conta"
         aria-expanded={open}
         aria-haspopup="menu"
-        className={`relative flex h-11 min-h-[44px] w-11 min-w-[44px] items-center justify-center gap-0.5 text-foreground transition hover:text-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+        className={`account-menu-trigger header-icon-btn relative gap-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent/30 focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
           open ? "text-accent" : ""
         }`}
       >
-        <User className="h-[18px] w-[18px]" strokeWidth={1.5} />
+        <User strokeWidth={1.5} />
         {user && (
           <span className="absolute bottom-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-accent" />
         )}
