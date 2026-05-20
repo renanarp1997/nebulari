@@ -48,12 +48,14 @@ export function ProductCarousel({
   const scroll = (dir: "left" | "right") => {
     const el = trackRef.current;
     if (!el) return;
-    const amount = Math.min(el.clientWidth * 0.75, 280);
-    el.scrollBy({ left: dir === "left" ? -amount : amount, behavior: "smooth" });
+    const firstItem = el.querySelector<HTMLElement>(".ecom-carousel-item");
+    const gap = Number.parseFloat(getComputedStyle(el).columnGap || getComputedStyle(el).gap || "12") || 12;
+    const step = firstItem ? firstItem.offsetWidth + gap : Math.min(el.clientWidth * 0.85, 300);
+    el.scrollBy({ left: dir === "left" ? -step : step, behavior: "smooth" });
   };
 
   return (
-    <div className="relative">
+    <div className="ecom-carousel-shell relative max-w-full">
       <CarouselEdgeFade
         tone={edgeTone}
         showLeft={showLeftEdgeFade}
@@ -98,7 +100,7 @@ export function ProductCarousel({
           onClick={() => scroll("left")}
           disabled={!canScrollLeft}
           aria-label="Anterior"
-          className="flex h-11 w-11 items-center justify-center border border-border bg-background-elevated disabled:opacity-30"
+          className="ecom-carousel-btn flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center border-2 border-foreground bg-background-elevated text-foreground transition hover:border-foreground disabled:opacity-30"
         >
           <ChevronLeft className="h-4 w-4" />
         </button>
@@ -107,7 +109,7 @@ export function ProductCarousel({
           onClick={() => scroll("right")}
           disabled={!canScrollRight}
           aria-label="Próximo"
-          className="flex h-11 w-11 items-center justify-center border border-border bg-background-elevated disabled:opacity-30"
+          className="ecom-carousel-btn flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center border-2 border-foreground bg-background-elevated text-foreground transition hover:border-foreground disabled:opacity-30"
         >
           <ChevronRight className="h-4 w-4" />
         </button>

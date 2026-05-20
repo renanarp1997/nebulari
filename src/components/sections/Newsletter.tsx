@@ -2,11 +2,10 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { TrustBadge } from "@/components/ui/TrustBadge";
+import { Reveal } from "@/components/ui/Reveal";
 import { IMAGES } from "@/lib/images";
-import { fadeInUp } from "@/lib/motion";
 
 export function Newsletter() {
   const [email, setEmail] = useState("");
@@ -19,21 +18,16 @@ export function Newsletter() {
 
   return (
     <section id="newsletter" className="w-full">
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={fadeInUp}
-        className="newsletter-panel relative w-full overflow-hidden"
-      >
+      <Reveal className="newsletter-panel relative w-full overflow-hidden">
         <div className="relative min-h-[380px] w-full sm:min-h-[400px] lg:min-h-[420px]">
           <Image
             src={IMAGES.newsletter}
             alt=""
             fill
+            quality={65}
+            loading="lazy"
             className="editorial-photo object-cover opacity-35"
             sizes="100vw"
-            priority={false}
           />
           <div className="newsletter-gradient absolute inset-0" />
           <div className="newsletter-glow absolute inset-0" />
@@ -45,7 +39,7 @@ export function Newsletter() {
             }}
             aria-hidden
           />
-          <div className="film-grain film-grain-rich absolute inset-0" />
+          <div className="film-grain film-grain-rich absolute inset-0 max-md:hidden" />
 
           <div className="relative site-container flex min-h-[380px] w-full flex-col justify-center px-5 py-10 sm:min-h-[400px] sm:px-8 sm:py-14 lg:min-h-[420px] lg:px-12 lg:py-16">
             <div className="w-full max-w-xl lg:max-w-2xl">
@@ -95,7 +89,7 @@ export function Newsletter() {
             </div>
           </div>
         </div>
-      </motion.div>
+      </Reveal>
     </section>
   );
 }

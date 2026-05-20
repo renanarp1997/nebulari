@@ -2,25 +2,15 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-function getLazyRootMargin() {
-  if (typeof window === "undefined") return "120px 0px";
-  return window.matchMedia("(max-width: 639px)").matches ? "48px 0px" : "200px 0px";
-}
-
-export function LazyWhenVisible({
-  children,
-  minHeight = 320,
-  rootMargin,
-  className = "",
-}: {
+type RevealProps = {
   children: ReactNode;
-  minHeight?: number;
-  rootMargin?: string;
   className?: string;
-}) {
+  delayMs?: number;
+};
+
+export function Reveal({ children, className = "", delayMs = 0 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
-  const margin = rootMargin ?? getLazyRootMargin();
 
   useEffect(() => {
     const el = ref.current;
@@ -33,20 +23,20 @@ export function LazyWhenVisible({
           observer.disconnect();
         }
       },
-      { rootMargin: margin, threshold: 0.01 }
+      { rootMargin: "-40px 0px", threshold: 0.08 }
     );
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [visible, margin]);
+  }, [visible]);
 
   return (
     <div
       ref={ref}
-      className={className}
-      style={{ minHeight: visible ? undefined : minHeight }}
+      className={`reveal-on-scroll ${visible ? "reveal-on-scroll--visible" : ""} ${className}`}
+      style={visible && delayMs > 0 ? { transitionDelay: `${delayMs}ms` } : undefined}
     >
-      {visible ? children : null}
+      {children}
     </div>
   );
 }

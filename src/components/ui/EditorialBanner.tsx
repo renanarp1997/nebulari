@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { fadeInUp } from "@/lib/motion";
+import { Reveal } from "@/components/ui/Reveal";
 
 export function EditorialBanner({
   eyebrow,
@@ -30,13 +29,7 @@ export function EditorialBanner({
   const isDark = variant === "dark" || variant === "accent";
 
   return (
-    <motion.div
-      variants={fadeInUp}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-40px" }}
-      className="site-container"
-    >
+    <Reveal className="site-container">
       <Link
         href={href}
         className={`ecom-editorial-banner group relative grid grid-cols-1 overflow-hidden border border-border/80 transition duration-500 active:opacity-95 lg:grid-cols-12 lg:hover:shadow-product-hover ${
@@ -56,6 +49,8 @@ export function EditorialBanner({
             src={image}
             alt={imageAlt}
             fill
+            quality={75}
+            loading="lazy"
             className={`object-cover transition duration-700 group-hover:scale-105 ${
               isDark ? "opacity-90 editorial-photo" : "editorial-photo-soft"
             }`}
@@ -106,6 +101,6 @@ export function EditorialBanner({
           </span>
         </div>
       </Link>
-    </motion.div>
+    </Reveal>
   );
 }

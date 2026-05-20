@@ -13,7 +13,7 @@ export function EditorialTreatment({
   variant?: EditorialVariant;
 }) {
   return (
-    <div className="pointer-events-none absolute inset-0" aria-hidden>
+    <div className="pointer-events-none absolute inset-0 max-md:hidden" aria-hidden>
       <div className={`absolute inset-0 ${variantClass[variant]}`} />
       <div className="editorial-specular absolute inset-0" />
       <div className="editorial-vignette absolute inset-0" />

@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import { Search, ShoppingBag, Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/lib/constants";
 import { useCart } from "@/context/CartContext";
@@ -96,29 +95,24 @@ export function Header() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden border-t border-border bg-background-elevated min-[1280px]:hidden"
-          >
-            <nav className="site-container flex flex-col py-2">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="border-b border-border py-4 text-sm font-medium uppercase tracking-widest text-foreground"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div
+        className={`grid overflow-hidden border-t border-border bg-background-elevated transition-[grid-template-rows] duration-300 ease-out min-[1280px]:hidden ${
+          mobileOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+        }`}
+      >
+        <nav className="site-container flex min-h-0 flex-col overflow-hidden py-2">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() => setMobileOpen(false)}
+              className="border-b border-border py-4 text-sm font-medium uppercase tracking-widest text-foreground"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
+      </div>
     </header>
   );
 }

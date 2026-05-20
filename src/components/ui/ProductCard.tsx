@@ -49,7 +49,7 @@ function ProductCardInner({
         >
           {!isCompact && (
             <div
-              className={`pointer-events-none absolute inset-0 z-[1] ${ATMOSPHERE_META[atmosphere].glowClass} opacity-40`}
+              className={`pointer-events-none absolute inset-0 z-[1] max-md:hidden ${ATMOSPHERE_META[atmosphere].glowClass} opacity-40`}
               aria-hidden
             />
           )}
@@ -58,6 +58,7 @@ function ProductCardInner({
             alt={product.alt}
             fill
             priority={priorityImage}
+            quality={priorityImage ? 75 : 65}
             loading={priorityImage ? undefined : "lazy"}
             sizes={
               isCarousel

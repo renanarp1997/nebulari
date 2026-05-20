@@ -32,7 +32,7 @@ export function AddToCartButton({
         className="ecom-add-slim flex w-full min-h-[2.5rem] items-center justify-center gap-1.5 bg-foreground py-2 text-[10px] font-bold uppercase tracking-wider text-white transition hover:bg-accent sm:min-h-[2.75rem] sm:text-[11px]"
       >
         {added ? <Check className="h-3 w-3" /> : <ShoppingBag className="h-3 w-3" strokeWidth={2} />}
-        {added ? "Ok" : "Adicionar"}
+        {added ? "OK" : "ADICIONAR"}
       </button>
     );
   }
@@ -58,17 +58,17 @@ export function AddToCartButton({
     <button
       type="button"
       onClick={handleClick}
-      className="ecom-add-btn group/btn flex w-full items-center justify-center gap-2 border border-foreground/15 bg-foreground px-4 py-2.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-accent"
+      className="ecom-add-btn group/btn flex w-full min-h-[2.75rem] items-center justify-center gap-2 border border-foreground bg-foreground px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white transition hover:bg-accent"
     >
       {added ? (
         <>
-          <Check className="h-3.5 w-3.5" />
-          Adicionado
+          <Check className="h-3.5 w-3.5" strokeWidth={2} />
+          ADICIONADO
         </>
       ) : (
         <>
           <ShoppingBag className="h-3.5 w-3.5 transition group-hover/btn:scale-105" strokeWidth={1.5} />
-          Adicionar
+          ADICIONAR
         </>
       )}
     </button>

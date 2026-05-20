@@ -6,13 +6,15 @@ import "./globals.css";
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600"],
+  display: "swap",
 });
 
 const sora = Sora({
   variable: "--font-sora",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "600"],
+  display: "swap",
 });
 
 export const viewport = {
@@ -38,8 +40,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className={`${cormorant.variable} ${sora.variable} scroll-smooth`}>
-      <body className="texture-studio min-h-screen font-sans antialiased">
+    <html lang="pt-BR" className={`${cormorant.variable} ${sora.variable} max-md:scroll-auto scroll-smooth`}>
+      <body className="texture-studio mobile-lite min-h-screen font-sans antialiased">
         <StoreProvider>{children}</StoreProvider>
       </body>
     </html>

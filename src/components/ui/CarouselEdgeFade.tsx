@@ -26,7 +26,7 @@ export function CarouselEdgeFade({
       {showLeft ? (
         <div
           aria-hidden
-          className={`pointer-events-none absolute inset-y-0 left-0 z-10 w-10 sm:w-14 lg:w-16 ${className}`}
+          className={`pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-10 sm:block sm:w-14 lg:w-16 ${className}`}
           style={{
             background: `linear-gradient(to right, ${color} 0%, ${color} 18%, transparent 100%)`,
           }}
@@ -35,7 +35,7 @@ export function CarouselEdgeFade({
       {showRight ? (
         <div
           aria-hidden
-          className={`pointer-events-none absolute inset-y-0 right-0 z-10 w-10 sm:w-14 lg:w-16 ${className}`}
+          className={`pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-10 sm:block sm:w-14 lg:w-16 ${className}`}
           style={{
             background: `linear-gradient(to left, ${color} 0%, ${color} 18%, transparent 100%)`,
           }}

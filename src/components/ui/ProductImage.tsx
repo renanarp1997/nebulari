@@ -47,8 +47,10 @@ export function ProductImage({
           alt={alt}
           fill
           priority={priority}
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
-          className="editorial-photo object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
+          quality={priority ? 75 : 60}
+          loading={priority ? undefined : "lazy"}
+          sizes="(max-width: 640px) 85vw, (max-width: 1024px) 50vw, 400px"
+          className="editorial-photo object-cover transition duration-500 ease-out group-hover:scale-[1.03]"
         />
         {overlay !== "none" && (
           <div

@@ -1,10 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ProductDenseGrid } from "@/components/ui/ProductDenseGrid";
+import { Reveal } from "@/components/ui/Reveal";
 import { PRODUCTS } from "@/lib/products";
-import { fadeInUp } from "@/lib/motion";
 
 const bentoProducts = PRODUCTS.slice(0, 8);
 
@@ -12,13 +11,7 @@ export function ProductShowcase() {
   return (
     <section id="destaques" className="section-dense border-b border-border bg-background-elevated">
       <div className="site-container">
-        <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="flex flex-wrap items-end justify-between gap-3"
-        >
+        <Reveal className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-accent">
               Destaques
@@ -36,25 +29,15 @@ export function ProductShowcase() {
           >
             Galeria completa →
           </Link>
-        </motion.div>
+        </Reveal>
 
-        <ProductDenseGrid
-          products={bentoProducts}
-          density="bento"
-          className="mt-5"
-        />
+        <ProductDenseGrid products={bentoProducts} density="bento" className="mt-5" />
       </div>
 
       <div id="galeria-pecas" className="site-container mt-6 sm:mt-8">
-        <motion.p
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="mb-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted"
-        >
+        <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted">
           Blocos & colecionáveis
-        </motion.p>
+        </p>
         <ProductDenseGrid products={PRODUCTS.filter((p) => p.collectionId === "geek")} />
       </div>
     </section>

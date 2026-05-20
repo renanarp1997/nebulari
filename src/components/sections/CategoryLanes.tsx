@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { CarouselEdgeFade } from "@/components/ui/CarouselEdgeFade";
@@ -13,19 +14,30 @@ const LANES = [
   { collectionId: "espaciais" as const, label: "Metais cósmicos" },
 ];
 
-const LANE_PRODUCT_LIMIT = 6;
+const LANE_DESKTOP = 6;
+const LANE_MOBILE = 4;
 
-function getLaneProducts(collectionId: string): Product[] {
-  return PRODUCTS.filter((p) => p.collectionId === collectionId).slice(0, LANE_PRODUCT_LIMIT);
+function getLaneProducts(collectionId: string, limit: number): Product[] {
+  return PRODUCTS.filter((p) => p.collectionId === collectionId).slice(0, limit);
 }
 
 export function CategoryLanes() {
+  const [limit, setLimit] = useState(LANE_MOBILE);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 640px)");
+    const apply = () => setLimit(mq.matches ? LANE_DESKTOP : LANE_MOBILE);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
+
   return (
     <section id="corredores" className="section-dense border-b border-border bg-background-elevated">
-      <div className="site-container space-y-6 px-5 sm:space-y-8 sm:px-8">
+      <div className="site-container space-y-6 sm:space-y-8">
         {LANES.map((lane, index) => {
           const col = COLLECTIONS.find((c) => c.id === lane.collectionId);
-          const products = getLaneProducts(lane.collectionId);
+          const products = getLaneProducts(lane.collectionId, limit);
 
           return (
             <div key={lane.collectionId}>
@@ -46,7 +58,7 @@ export function CategoryLanes() {
                 </Link>
               </div>
 
-              <div className="relative max-sm:-mx-5">
+              <div className="ecom-carousel-shell relative max-w-full">
                 <CarouselEdgeFade
                   tone="elevated"
                   showLeft={lane.collectionId !== "espaciais"}

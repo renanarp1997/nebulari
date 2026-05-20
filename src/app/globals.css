@@ -71,11 +71,84 @@ main > div[class*="section-"],
   contain: layout style paint;
 }
 
+html {
+  overflow-x: hidden;
+}
+
+/* Entrada leve — substitui framer-motion nas seções abaixo da dobra */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translate3d(0, 18px, 0);
+  transition:
+    opacity 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll--visible {
+  opacity: 1;
+  transform: none;
+}
+
+.hero-enter {
+  animation: hero-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-enter-delay-1 {
+  animation-delay: 0.08s;
+}
+
+.hero-enter-delay-2 {
+  animation-delay: 0.16s;
+}
+
+.hero-enter-delay-3 {
+  animation-delay: 0.42s;
+}
+
+.hero-floating-card-wrap {
+  animation: hero-enter 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero-enter,
+  .hero-enter-delay-1,
+  .hero-enter-delay-2,
+  .hero-enter-delay-3 {
+    animation: none;
+  }
+}
+
+/* Seções abaixo da dobra — renderização adiada */
+.section-dense,
+.section-dense-tight {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 420px;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sora), system-ui, sans-serif;
   overflow-x: hidden;
+  max-width: 100%;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -1477,18 +1550,38 @@ label,
 /* Card padrão em carrosséis e corredores — mesmo tamanho da vitrine principal */
 .ecom-carousel-item,
 .ecom-lane-item {
-  width: min(78vw, 300px);
+  width: calc(
+    100vw - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px) - 4.5rem
+  );
+  max-width: 300px;
 }
 
 @media (min-width: 640px) {
   .ecom-carousel-item,
   .ecom-lane-item {
     width: 300px;
+    max-width: none;
   }
 }
 
 .ecom-carousel-track {
-  gap: 1rem;
+  gap: 0.75rem;
+  scroll-snap-type: x mandatory;
+}
+
+.ecom-carousel-track > * {
+  scroll-snap-align: start;
+}
+
+@media (min-width: 640px) {
+  .ecom-carousel-track {
+    gap: 1rem;
+    scroll-snap-type: none;
+  }
+
+  .ecom-carousel-track > * {
+    scroll-snap-align: none;
+  }
 }
 
 .ecom-card-compact.luxury-product-card:hover,
@@ -1503,10 +1596,39 @@ label,
 .ecom-lane-track {
   scroll-snap-type: x mandatory;
   gap: 1rem;
+  align-items: flex-start;
+  padding-bottom: 0.25rem;
 }
 
 .ecom-lane-track > * {
   scroll-snap-align: start;
+}
+
+/* Corredores — card completo visível (imagem + preço + ADICIONAR) */
+#corredores {
+  content-visibility: visible;
+  contain-intrinsic-size: auto;
+}
+
+.ecom-lane-item {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  overflow: visible;
+}
+
+.ecom-lane-item .ecom-marketplace-card {
+  display: flex;
+  width: 100%;
+  flex: 1;
+  flex-direction: column;
+  overflow: visible;
+  content-visibility: visible;
+}
+
+.ecom-lane-item .ecom-add-btn {
+  min-height: 2.75rem;
+  border-radius: 2px;
 }
 
 .ecom-discovery-grid {
@@ -2332,14 +2454,29 @@ body {
   min-height: calc(var(--announcement-h) + env(safe-area-inset-top, 0px));
 }
 
-/* Horizontal scroll — full bleed no mobile */
+/* Horizontal scroll — bleed alinhado ao padding do site-container (1rem) */
 .ecom-scroll-bleed {
-  margin-left: -1.25rem;
-  margin-right: -1.25rem;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
-  scroll-padding-left: 1.25rem;
-  scroll-padding-right: 1.25rem;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  scroll-padding-left: 1rem;
+  scroll-padding-right: 1rem;
+}
+
+.ecom-carousel-shell {
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 639px) {
+  .ecom-carousel-track {
+    scroll-padding-inline: 1rem;
+  }
+
+  .ecom-carousel-track > .ecom-carousel-item:last-child {
+    scroll-margin-right: 1rem;
+  }
 }
 
 @media (min-width: 640px) {
@@ -2938,5 +3075,96 @@ body {
 
   .site-chrome .header-menu-btn {
     display: flex !important;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   MOBILE — máximo desempenho
+   ═══════════════════════════════════════════ */
+@media (max-width: 639px) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .texture-studio,
+  .mobile-lite {
+    background-image: none;
+  }
+
+  .film-grain::after,
+  .film-grain-rich::after,
+  #inicio .film-grain::after {
+    display: none !important;
+  }
+
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+
+  .hero-enter,
+  .hero-enter-delay-1,
+  .hero-enter-delay-2,
+  .hero-enter-delay-3,
+  .hero-floating-card-wrap {
+    animation: none;
+  }
+
+  .luxury-product-card,
+  .ecom-marketplace-card,
+  .ecom-product-card {
+    will-change: auto;
+    transition: none;
+    box-shadow: 0 1px 2px rgba(12, 12, 13, 0.04);
+  }
+
+  .luxury-product-card:hover,
+  .ecom-marketplace-card:hover {
+    transform: none;
+    box-shadow: 0 1px 2px rgba(12, 12, 13, 0.04);
+  }
+
+  .luxury-product-card .product-shine,
+  .atmo-specular-sweep,
+  .light-particle {
+    display: none !important;
+  }
+
+  .backdrop-blur-sm,
+  .backdrop-blur-md,
+  [class*="backdrop-blur"] {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .hero-btn.btn-premium-secondary,
+  .newsletter-input {
+    backdrop-filter: none;
+  }
+
+  .section-dense,
+  .section-dense-tight {
+    contain-intrinsic-size: auto 280px;
+  }
+
+  #inicio {
+    content-visibility: visible;
+  }
+
+  .editorial-photo,
+  .editorial-photo-soft,
+  .editorial-photo-warm {
+    transition: none !important;
+  }
+
+  .group:hover .editorial-photo,
+  .group:hover .editorial-photo-soft {
+    transform: none !important;
+  }
+
+  .ecom-carousel-track {
+    scroll-snap-type: x proximity;
   }
 }

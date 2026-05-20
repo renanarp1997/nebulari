@@ -1,23 +1,16 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { TrendingUp } from "lucide-react";
 import { SectionActionLink } from "@/components/ui/SectionActionLink";
 import { ProductCarousel } from "@/components/ui/ProductCarousel";
+import { Reveal } from "@/components/ui/Reveal";
 import { TRENDING } from "@/lib/products";
-import { fadeInUp } from "@/lib/motion";
 
 export function TrendingProducts() {
   return (
     <section id="em-alta" className="section-dense border-b border-border bg-background">
       <div className="site-container">
-        <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="flex flex-wrap items-end justify-between gap-3"
-        >
+        <Reveal className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <p className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-accent">
               <TrendingUp className="h-3.5 w-3.5" strokeWidth={1.5} />
@@ -28,9 +21,9 @@ export function TrendingProducts() {
             </h2>
           </div>
           <SectionActionLink href="#corredores">Ver coleções</SectionActionLink>
-        </motion.div>
+        </Reveal>
 
-        <ProductCarousel products={[...TRENDING]} />
+        <ProductCarousel products={[...TRENDING]} edgeTone="background" showLeftEdgeFade={false} />
       </div>
     </section>
   );

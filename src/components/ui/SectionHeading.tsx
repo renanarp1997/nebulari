@@ -1,7 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { fadeInUp } from "@/lib/motion";
+import { Reveal } from "@/components/ui/Reveal";
 
 interface SectionHeadingProps {
   eyebrow?: string;
@@ -19,13 +18,7 @@ export function SectionHeading({
   dark = false,
 }: SectionHeadingProps) {
   return (
-    <motion.div
-      variants={fadeInUp}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-60px" }}
-      className={align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-2xl"}
-    >
+    <Reveal className={align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-2xl"}>
       {eyebrow && (
         <p
           className={`mb-3 text-[11px] font-semibold uppercase tracking-[0.28em] ${
@@ -51,6 +44,6 @@ export function SectionHeading({
           {description}
         </p>
       )}
-    </motion.div>
+    </Reveal>
   );
 }

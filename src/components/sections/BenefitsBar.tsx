@@ -1,11 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { Truck, Shield, Gift, BadgeCheck } from "lucide-react";
+import { Reveal } from "@/components/ui/Reveal";
 import { BENEFITS } from "@/lib/constants";
 import { IMAGES } from "@/lib/images";
-import { fadeInUp, staggerContainer } from "@/lib/motion";
 
 const iconMap = {
   truck: Truck,
@@ -23,25 +22,20 @@ export function BenefitsBar() {
           alt=""
           fill
           sizes="100vw"
+          quality={60}
           loading="lazy"
           className="editorial-photo object-cover opacity-[0.05]"
           aria-hidden
         />
       </div>
       <div className="relative site-container px-4 py-8 sm:px-8 sm:py-14">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4"
-        >
-          {BENEFITS.map((benefit) => {
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
+          {BENEFITS.map((benefit, index) => {
             const Icon = iconMap[benefit.icon];
             return (
-              <motion.div
+              <Reveal
                 key={benefit.title}
-                variants={fadeInUp}
+                delayMs={index * 50}
                 className="benefit-card flex flex-col gap-4 border border-border/80 bg-background-elevated p-5 sm:flex-row sm:items-start sm:gap-5 sm:p-6"
               >
                 <div className="benefit-icon-wrap shrink-0">
@@ -55,10 +49,10 @@ export function BenefitsBar() {
                     {benefit.description}
                   </p>
                 </div>
-              </motion.div>
+              </Reveal>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
