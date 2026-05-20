@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Flame } from "lucide-react";
+import { Flame } from "lucide-react";
+import { SectionActionLink } from "@/components/ui/SectionActionLink";
 import { ProductDenseGrid } from "@/components/ui/ProductDenseGrid";
 import { BEST_SELLERS } from "@/lib/products";
 import { fadeInUp } from "@/lib/motion";
@@ -27,13 +27,7 @@ export function BestSellers() {
               O que todo mundo está comprando
             </h2>
           </div>
-          <Link
-            href="#catalogo"
-            className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-foreground hover:text-accent"
-          >
-            Ver catálogo
-            <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
+          <SectionActionLink href="#catalogo">Ver tudo</SectionActionLink>
         </motion.div>
 
         <ProductDenseGrid products={[...BEST_SELLERS]} className="mt-4" />

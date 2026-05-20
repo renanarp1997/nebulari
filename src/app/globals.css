@@ -1305,6 +1305,175 @@ label,
 }
 
 /* ═══════════════════════════════════════════
+   MARKETPLACE — referência Shopee, visual Nebulari
+   ═══════════════════════════════════════════ */
+
+.header-search {
+  align-items: center;
+  gap: 0.65rem;
+  max-width: 32rem;
+  border: 1px solid var(--border);
+  background: var(--background-elevated);
+  padding: 0.65rem 1rem;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.header-search:hover,
+.header-search:focus-visible {
+  border-color: rgba(91, 33, 182, 0.35);
+  box-shadow: 0 0 0 3px rgba(91, 33, 182, 0.08);
+  outline: none;
+}
+
+.announcement-cta {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: var(--accent);
+  padding: 0.35rem 0.75rem;
+  color: #fff;
+  transition: background 0.2s ease;
+}
+
+.announcement-cta:hover {
+  background: var(--accent-hover);
+}
+
+.marketplace-trust-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--border);
+  background: var(--background);
+  padding: 0.4rem 0.75rem;
+  white-space: nowrap;
+}
+
+.ecom-marketplace-card {
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(12, 12, 13, 0.04);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.ecom-marketplace-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(91, 33, 182, 0.22);
+  box-shadow: 0 8px 24px -8px rgba(12, 12, 13, 0.12);
+}
+
+.ecom-card-badges {
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
+  z-index: 20;
+  display: flex;
+  max-width: calc(100% - 1rem);
+  flex-flow: row wrap;
+  align-items: flex-start;
+  gap: 0.35rem;
+  pointer-events: none;
+}
+
+.ecom-card-badges > * {
+  pointer-events: auto;
+}
+
+.ecom-discount-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: var(--accent);
+  box-shadow: 0 2px 6px rgba(91, 33, 182, 0.35);
+}
+
+.product-badge--overlay {
+  line-height: 1.15;
+  letter-spacing: 0.1em;
+  backdrop-filter: none;
+}
+
+.ecom-marketplace-card .product-badge-vendido.product-badge--overlay {
+  border-color: rgba(12, 12, 13, 0.5);
+  background: rgba(12, 12, 13, 0.82);
+  color: #fff;
+}
+
+.ecom-marketplace-card .product-badge-novo.product-badge--overlay {
+  background: rgba(12, 12, 13, 0.75);
+}
+
+.ecom-marketplace-card .product-badge-destaque.product-badge--overlay {
+  background: rgba(91, 33, 182, 0.88);
+  border-color: rgba(91, 33, 182, 0.5);
+}
+
+.ecom-marketplace-card .product-badge-limitado.product-badge--overlay {
+  background: rgba(92, 72, 48, 0.9);
+  border-color: rgba(196, 165, 116, 0.5);
+}
+
+.ecom-price-current {
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.ecom-marketplace-card .ecom-price-current.text-xl {
+  font-size: 1.125rem;
+}
+
+@media (min-width: 640px) {
+  .ecom-marketplace-card .ecom-price-current.text-xl {
+    font-size: 1.25rem;
+  }
+}
+
+.ecom-price-compare {
+  color: var(--muted);
+  text-decoration: line-through;
+}
+
+.ecom-shipping-pill {
+  border: 1px solid rgba(91, 33, 182, 0.2);
+  background: rgba(91, 33, 182, 0.06);
+  padding: 0.15rem 0.45rem;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent-hover);
+}
+
+.ecom-section-link {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.ecom-section-link:hover {
+  color: var(--accent-hover);
+}
+
+.ecom-add-btn {
+  min-height: 2.5rem;
+  border-radius: 2px;
+}
+
+.ecom-add-btn:hover {
+  box-shadow: 0 4px 14px -4px rgba(91, 33, 182, 0.45);
+}
+
+/* ═══════════════════════════════════════════
    CONTA — dropdown + modal auth
    ═══════════════════════════════════════════ */
 

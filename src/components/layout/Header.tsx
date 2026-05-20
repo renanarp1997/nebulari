@@ -39,34 +39,43 @@ export function Header() {
           : "border-b border-transparent bg-background/80 backdrop-blur-sm"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-[1400px] items-center justify-between px-5 sm:h-[4.5rem] sm:px-8">
+      <div className="mx-auto flex h-16 max-w-[1400px] items-center gap-3 px-5 sm:h-[4.5rem] sm:gap-4 sm:px-8">
         <Link
           href="#inicio"
-          className="font-display text-xl font-semibold tracking-tight text-foreground sm:text-2xl"
+          className="shrink-0 font-display text-xl font-semibold tracking-tight text-foreground sm:text-2xl"
         >
           Nebulari
         </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex xl:gap-10">
+        <Link
+          href="#catalogo"
+          className="header-search hidden min-w-0 flex-1 md:flex"
+          aria-label="Buscar no catálogo"
+        >
+          <Search className="h-[18px] w-[18px] shrink-0 text-muted" strokeWidth={1.5} />
+          <span className="truncate text-sm text-muted">Buscar produtos, coleções, marcas…</span>
+        </Link>
+
+        <nav className="hidden shrink-0 items-center gap-6 lg:flex xl:gap-8">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-[12px] font-medium uppercase tracking-widest text-muted transition hover:text-foreground"
+              className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted transition hover:text-foreground"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-1">
-          <button
-            type="button"
+        <div className="ml-auto flex shrink-0 items-center gap-0.5">
+          <Link
+            href="#catalogo"
             aria-label="Buscar"
-            className="relative flex h-11 w-11 items-center justify-center text-foreground transition hover:text-accent"
+            className="relative flex h-11 w-11 items-center justify-center text-foreground transition hover:text-accent md:hidden"
           >
             <Search className="h-[18px] w-[18px]" strokeWidth={1.5} />
-          </button>
+          </Link>
           <UserAccountMenu />
           <button
             type="button"

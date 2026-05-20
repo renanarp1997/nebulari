@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { Grid3X3 } from "lucide-react";
+import { SectionActionLink } from "@/components/ui/SectionActionLink";
 import { ProductDenseGrid } from "@/components/ui/ProductDenseGrid";
 import { CATALOG_ALL } from "@/lib/products";
 
@@ -30,12 +30,7 @@ export function ProductCatalog() {
               Role, descubra e adicione — densidade de vitrine premium.
             </p>
           </div>
-          <Link
-            href="#colecoes"
-            className="text-[11px] font-semibold uppercase tracking-wider text-foreground hover:text-accent"
-          >
-            Filtrar por coleção →
-          </Link>
+          <SectionActionLink href="#colecoes">Filtrar coleções</SectionActionLink>
         </div>
 
         <ProductDenseGrid products={visible} className="mt-5" />

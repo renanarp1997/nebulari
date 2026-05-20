@@ -1,22 +1,31 @@
 import { Star } from "lucide-react";
+import { formatSoldCount } from "@/lib/product-utils";
 
 export function StarRating({
   rating,
   reviewCount,
   size = "sm",
   dense = false,
+  marketplace = false,
 }: {
   rating: number;
   reviewCount?: number;
   size?: "sm" | "md";
   dense?: boolean;
+  marketplace?: boolean;
 }) {
-  if (dense) {
+  if (marketplace || dense) {
     return (
-      <p className="text-xs text-muted sm:text-[13px]">
-        <span className="font-medium text-foreground">{rating.toFixed(1)}</span>
+      <p className="ecom-rating-line text-xs text-muted">
+        <span className="inline-flex items-center gap-0.5 text-[var(--gold-muted)]">
+          <Star className="h-3 w-3 fill-[var(--gold-muted)]" strokeWidth={0} />
+          <span className="font-semibold text-foreground">{rating.toFixed(1)}</span>
+        </span>
         {reviewCount !== undefined && (
-          <span> · {reviewCount.toLocaleString("pt-BR")} avaliações</span>
+          <>
+            <span className="mx-1 text-border">|</span>
+            <span>{formatSoldCount(reviewCount)}</span>
+          </>
         )}
       </p>
     );

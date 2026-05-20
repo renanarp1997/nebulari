@@ -14,9 +14,17 @@ const labels: Record<BadgeVariant, string> = {
   destaque: "Destaque",
 };
 
-export function ProductBadge({ variant }: { variant: BadgeVariant }) {
+export function ProductBadge({
+  variant,
+  overlay = false,
+}: {
+  variant: BadgeVariant;
+  overlay?: boolean;
+}) {
   return (
-    <span className={`product-badge ${variantClass[variant]}`}>
+    <span
+      className={`product-badge ${variantClass[variant]} ${overlay ? "product-badge--overlay" : ""}`}
+    >
       {labels[variant]}
     </span>
   );

@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
+import { SectionActionLink } from "@/components/ui/SectionActionLink";
 import { ProductCarousel } from "@/components/ui/ProductCarousel";
 import { NEW_ARRIVALS, BEST_SELLERS, TRENDING } from "@/lib/products";
 import { fadeInUp } from "@/lib/motion";
@@ -26,9 +26,7 @@ export function ExploreStrip() {
             <Sparkles className="h-3.5 w-3.5" />
             Explorar sem parar
           </p>
-          <Link href="#catalogo" className="text-[10px] font-semibold uppercase tracking-wider text-muted hover:text-foreground">
-            Ver catálogo →
-          </Link>
+          <SectionActionLink href="#catalogo">Ver catálogo</SectionActionLink>
         </motion.div>
         <ProductCarousel products={strip} />
       </div>

@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "framer-motion";
 import { TrendingUp } from "lucide-react";
+import { SectionActionLink } from "@/components/ui/SectionActionLink";
 import { ProductCarousel } from "@/components/ui/ProductCarousel";
 import { TRENDING } from "@/lib/products";
 import { fadeInUp } from "@/lib/motion";
@@ -27,9 +27,7 @@ export function TrendingProducts() {
               Tendências da semana
             </h2>
           </div>
-          <Link href="#corredores" className="text-[11px] font-semibold uppercase tracking-wider text-muted hover:text-foreground">
-            Por coleção →
-          </Link>
+          <SectionActionLink href="#corredores">Ver coleções</SectionActionLink>
         </motion.div>
 
         <ProductCarousel products={[...TRENDING]} />
