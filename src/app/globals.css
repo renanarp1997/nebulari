@@ -1029,9 +1029,15 @@ label,
 }
 
 .site-header-nav {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 2rem;
+}
+
+@media (min-width: 1280px) {
+  .site-header-nav {
+    display: flex;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -1695,10 +1701,10 @@ label,
    ═══════════════════════════════════════════ */
 
 .header-search {
-  display: flex;
+  display: none;
   flex: 0 1 auto;
   width: min(520px, 100%);
-  min-width: min(420px, 100%);
+  min-width: 0;
   align-items: center;
   gap: 0.75rem;
   height: 2.75rem;
@@ -1712,12 +1718,10 @@ label,
     box-shadow 0.2s ease;
 }
 
-@media (max-width: 1023px) {
+@media (min-width: 1280px) {
   .header-search {
-    min-width: 0;
-    width: 100%;
-    max-width: none;
-    flex: 1;
+    display: flex;
+    min-width: min(420px, 100%);
   }
 }
 
@@ -1794,14 +1798,14 @@ label,
 @media (min-width: 768px) {
   .marketplace-trust-track {
     gap: 0.75rem;
-    overflow-x: visible;
     flex-wrap: nowrap;
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .marketplace-trust-track {
     gap: 1rem;
+    overflow-x: visible;
   }
 }
 
@@ -2383,9 +2387,200 @@ body {
 }
 
 /* ═══════════════════════════════════════════
+   MOBILE / TABLET — chrome + hero (<1280px)
+   ═══════════════════════════════════════════ */
+@media (max-width: 1279px) {
+  .site-chrome {
+    --header-h: 56px;
+  }
+
+  .site-chrome .site-container {
+    padding-inline: 1rem;
+  }
+
+  .site-chrome .announcement-bar-inner {
+    max-width: none;
+    padding-inline: 1rem;
+  }
+
+  .site-chrome .announcement-bar-copy {
+    font-size: 0.625rem;
+    justify-content: flex-start;
+  }
+
+  .site-chrome .announcement-cta {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.5625rem;
+  }
+
+  .site-chrome .site-header {
+    display: block;
+    height: auto;
+    min-height: 0;
+    background: var(--background-elevated);
+  }
+
+  .site-chrome .site-header-inner {
+    display: flex !important;
+    grid-template-columns: unset !important;
+    width: 100%;
+    max-width: none;
+    height: 56px;
+    min-height: 56px;
+    padding-inline: 1rem;
+    gap: 0.35rem;
+    overflow: visible;
+  }
+
+  .site-chrome .site-header-logo {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .site-chrome .header-search {
+    display: none !important;
+  }
+
+  .site-chrome .site-header-nav {
+    display: none !important;
+  }
+
+  .site-chrome .site-header-actions {
+    display: flex;
+    margin-left: auto;
+    gap: 0.25rem;
+    flex-shrink: 0;
+  }
+
+  .site-chrome .header-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+  }
+
+  .site-chrome .header-icon-btn svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .site-chrome .account-menu-trigger {
+    width: 2.75rem;
+    height: 2.75rem;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+  }
+
+  .site-chrome .header-menu-btn {
+    display: flex !important;
+  }
+
+  .site-chrome .marketplace-trust-bar {
+    height: auto;
+    min-height: 0;
+    padding-block: 0.625rem;
+  }
+
+  .site-chrome .marketplace-trust-bar-inner {
+    display: block;
+    max-width: none;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding-inline: 0;
+  }
+
+  .site-chrome .marketplace-trust-track {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    overflow: visible;
+    padding: 0 1rem 0.25rem;
+  }
+
+  .site-chrome .marketplace-trust-pill {
+    display: flex;
+    flex: none;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    height: auto;
+    min-height: 2.5rem;
+    padding: 0.5rem 0.625rem;
+    white-space: normal;
+    font-size: 0.6875rem;
+    line-height: 1.25;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.35rem;
+  }
+
+  .site-chrome .marketplace-trust-label,
+  .site-chrome .marketplace-trust-detail {
+    font-size: 0.6875rem;
+  }
+
+  .site-chrome .marketplace-trust-detail {
+    flex-basis: 100%;
+    margin-left: 1.35rem;
+  }
+
+  .site-chrome .marketplace-trust-icon {
+    width: 0.9375rem;
+    height: 0.9375rem;
+    flex-shrink: 0;
+  }
+
+  #inicio,
+  #inicio .film-grain {
+    display: block;
+    min-height: 0;
+  }
+
+  .hero-layout {
+    display: block;
+    flex: none;
+    min-height: 0;
+    padding-inline: 1rem;
+  }
+
+  .hero-copy {
+    width: 100%;
+    max-width: none;
+    padding: 2rem 0 1rem;
+  }
+
+  .hero-visual {
+    width: 100%;
+    max-width: none;
+    min-height: 20rem;
+    height: auto;
+    aspect-ratio: 4 / 5;
+  }
+
+  .hero-title {
+    max-width: none;
+    font-size: clamp(2.25rem, 11vw, 3.25rem) !important;
+    line-height: 0.95 !important;
+  }
+
+  .hero-lead {
+    max-width: none;
+    font-size: 1.0625rem !important;
+  }
+}
+
+/* ═══════════════════════════════════════════
    REFERÊNCIA DESKTOP — container 1360px (2º print)
    ═══════════════════════════════════════════ */
-@media (min-width: 1024px) {
+@media (min-width: 1280px) {
   .site-chrome .announcement-bar,
   .site-chrome .announcement-bar-inner {
     height: 38px;
@@ -2718,5 +2913,30 @@ body {
   .hero-floating-card {
     width: 280px;
     max-width: 280px;
+  }
+}
+
+/* Chrome mobile — garante header compacto mesmo com CSS legado */
+@media (max-width: 1279px) {
+  .site-chrome .chrome-header-row > .header-search,
+  .site-chrome .chrome-header-row > .site-header-nav {
+    display: none !important;
+    visibility: hidden !important;
+    position: absolute !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+  }
+
+  .site-chrome .chrome-header-row {
+    display: flex !important;
+    align-items: center;
+    grid-template-columns: unset !important;
+  }
+
+  .site-chrome .header-menu-btn {
+    display: flex !important;
   }
 }

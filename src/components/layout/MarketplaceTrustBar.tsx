@@ -13,7 +13,7 @@ export function MarketplaceTrustBar() {
       <div className="site-container marketplace-trust-bar-inner">
         <div className="marketplace-trust-track hide-scrollbar">
           {ITEMS.map(({ icon: Icon, label, detail }) => (
-            <div key={label} className="marketplace-trust-pill min-w-0">
+            <div key={label} className="marketplace-trust-pill shrink-0">
               <Icon className="marketplace-trust-icon shrink-0 text-accent" strokeWidth={1.75} />
               <span className="marketplace-trust-label">{label}</span>
               <span className="marketplace-trust-detail">· {detail}</span>

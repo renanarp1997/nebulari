@@ -37,7 +37,7 @@ export function Header() {
         scrolled ? "shadow-sm" : ""
       }`}
     >
-      <div className="site-container site-header-inner">
+      <div className="site-container site-header-inner chrome-header-row">
         <Link
           href="#inicio"
           className="site-header-logo shrink-0 font-display font-semibold tracking-tight text-foreground"
@@ -47,7 +47,7 @@ export function Header() {
 
         <Link
           href="#catalogo"
-          className="header-search hidden min-w-0 md:flex"
+          className="header-search hidden min-w-0 min-[1280px]:flex"
           aria-label="Buscar no catálogo"
         >
           <Search strokeWidth={1.5} />
@@ -56,7 +56,7 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="site-header-nav hidden shrink-0 lg:flex">
+        <nav className="site-header-nav hidden shrink-0 min-[1280px]:flex">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
@@ -68,11 +68,11 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="site-header-actions shrink-0">
+        <div className="site-header-actions ml-auto shrink-0">
           <Link
             href="#catalogo"
             aria-label="Buscar"
-            className="header-icon-btn md:hidden"
+            className="header-icon-btn min-[1280px]:hidden"
           >
             <Search strokeWidth={1.5} />
           </Link>
@@ -88,7 +88,7 @@ export function Header() {
           <button
             type="button"
             aria-label="Menu"
-            className="header-icon-btn header-menu-btn lg:hidden"
+            className="header-icon-btn header-menu-btn min-[1280px]:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             {mobileOpen ? <X strokeWidth={1.5} /> : <Menu strokeWidth={1.5} />}
@@ -102,7 +102,7 @@ export function Header() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden border-t border-border bg-background-elevated lg:hidden"
+            className="overflow-hidden border-t border-border bg-background-elevated min-[1280px]:hidden"
           >
             <nav className="site-container flex flex-col py-2">
               {NAV_LINKS.map((link) => (
