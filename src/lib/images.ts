@@ -32,8 +32,8 @@ export const IMAGES = {
   whyFeatured: "/imagens/13.jpg",
   why: [
     "/imagens/14.jpg",
-    "/imagens/15.jpg",
-    "/imagens/16.jpg",
+    "/imagens/17.jpg",
+    "/imagens/6.jpg",
     "/imagens/18.jpg",
   ],
   testimonials: {

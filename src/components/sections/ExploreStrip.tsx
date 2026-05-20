@@ -28,7 +28,7 @@ export function ExploreStrip() {
           </p>
           <SectionActionLink href="#catalogo">Ver catálogo</SectionActionLink>
         </motion.div>
-        <ProductCarousel products={strip} />
+        <ProductCarousel products={strip} edgeTone="cream" showLeftEdgeFade={false} />
       </div>
     </section>
   );

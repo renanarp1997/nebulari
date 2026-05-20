@@ -4,8 +4,21 @@ import { useRef, useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { Product } from "@/lib/products";
 import { ProductCard } from "@/components/ui/ProductCard";
+import { CarouselEdgeFade } from "@/components/ui/CarouselEdgeFade";
 
-export function ProductCarousel({ products }: { products: Product[] }) {
+type ProductCarouselProps = {
+  products: Product[];
+  edgeTone?: "cream" | "elevated" | "background";
+  showLeftEdgeFade?: boolean;
+  showRightEdgeFade?: boolean;
+};
+
+export function ProductCarousel({
+  products,
+  edgeTone = "elevated",
+  showLeftEdgeFade = true,
+  showRightEdgeFade = true,
+}: ProductCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -41,8 +54,11 @@ export function ProductCarousel({ products }: { products: Product[] }) {
 
   return (
     <div className="relative">
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-8 bg-gradient-to-r from-background-elevated to-transparent sm:block sm:w-12" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-8 bg-gradient-to-l from-background-elevated to-transparent sm:block sm:w-12" />
+      <CarouselEdgeFade
+        tone={edgeTone}
+        showLeft={showLeftEdgeFade}
+        showRight={showRightEdgeFade}
+      />
 
       <div className="absolute -top-12 right-0 z-20 hidden gap-2 sm:flex lg:-top-14">
         <button

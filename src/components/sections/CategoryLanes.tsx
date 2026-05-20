@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ProductCard } from "@/components/ui/ProductCard";
+import { CarouselEdgeFade } from "@/components/ui/CarouselEdgeFade";
 import { COLLECTIONS } from "@/lib/constants";
 import { PRODUCTS, type Product } from "@/lib/products";
 
@@ -45,12 +46,18 @@ export function CategoryLanes() {
                 </Link>
               </div>
 
-              <div className="ecom-lane-track ecom-scroll-bleed hide-scrollbar flex gap-4 overflow-x-auto overscroll-x-contain pb-1 touch-pan-x">
-                {products.map((product) => (
-                  <div key={product.id} className="ecom-lane-item shrink-0">
-                    <ProductCard product={product} size="standard" />
-                  </div>
-                ))}
+              <div className="relative max-sm:-mx-5">
+                <CarouselEdgeFade
+                  tone="elevated"
+                  showLeft={lane.collectionId !== "espaciais"}
+                />
+                <div className="ecom-lane-track ecom-scroll-bleed hide-scrollbar flex gap-4 overflow-x-auto overscroll-x-contain pb-1 touch-pan-x">
+                  {products.map((product) => (
+                    <div key={product.id} className="ecom-lane-item shrink-0">
+                      <ProductCard product={product} size="standard" />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           );
