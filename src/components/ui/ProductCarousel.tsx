@@ -85,7 +85,7 @@ export function ProductCarousel({
 
       <div
         ref={trackRef}
-        className="ecom-carousel-track ecom-scroll-bleed hide-scrollbar flex gap-2 overflow-x-auto overscroll-x-contain pb-2 pt-1 touch-pan-x sm:scroll-smooth sm:gap-2.5"
+        className="ecom-carousel-track ecom-scroll-bleed hide-scrollbar flex gap-2 overflow-x-auto overscroll-x-contain pb-2 pt-1 touch-auto sm:scroll-smooth sm:gap-2.5"
       >
         {products.map((product) => (
           <div key={product.id} className="ecom-carousel-item shrink-0">

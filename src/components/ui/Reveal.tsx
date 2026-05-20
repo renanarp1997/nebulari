@@ -22,8 +22,8 @@ export function Reveal({ children, className = "", delayMs = 0 }: RevealProps) {
 
   useEffect(() => {
     if (prefersLiteMotion()) {
-      setVisible(true);
-      return;
+      const frame = window.requestAnimationFrame(() => setVisible(true));
+      return () => window.cancelAnimationFrame(frame);
     }
 
     const el = ref.current;

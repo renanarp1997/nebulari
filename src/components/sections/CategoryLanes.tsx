@@ -63,7 +63,7 @@ export function CategoryLanes() {
                   tone="elevated"
                   showLeft={lane.collectionId !== "espaciais"}
                 />
-                <div className="ecom-lane-track ecom-scroll-bleed hide-scrollbar flex gap-4 overflow-x-auto overscroll-x-contain pb-1 touch-pan-x">
+                <div className="ecom-lane-track ecom-scroll-bleed hide-scrollbar flex gap-4 overflow-x-auto overscroll-x-contain pb-1 touch-auto">
                   {products.map((product) => (
                     <div key={product.id} className="ecom-lane-item shrink-0">
                       <ProductCard product={product} size="standard" />
